@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.content_general {
+    width: 100%;display: flex;
+    flex-direction: column;
+}
+
+.main_content_section {
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 100;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.logo_cpc {
+    width: 30rem;
+    height: auto;
+}
+
+.main_content_section_content {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.main_content_section_title {
+    font-size: 3rem;
+    text-decoration: underline;
+    text-underline-offset: 2rem;
+    text-decoration-thickness: .1rem;
+    text-decoration-color: #000000;
+}
+
+.main_content_section_paragraph {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.main_content_section_btn_cadastrar {
+    width: 18.75rem;
+    height: 5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    background-color: #63B756;
+    border-radius: .8rem;
+}
+
+.main_content_section_content_btn {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 5%;
+}
+
+.main_content_section_btn_acompanhar, .main_content_section_btn_atualizar  {
+    width: 14.5rem;
+    height: 2.5rem;
+    background-color: #28324E;
+    color: white;
+    border-radius: .8rem;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.footer img{
+    width: 100%;
+}
+
+
