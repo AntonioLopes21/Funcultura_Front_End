@@ -2,15 +2,94 @@
     display: flex;
     flex-direction: row;
     list-style: none;
-    gap: 3%;
+    gap: 1%;
     justify-content: flex-start;
     
 }
 
-.nav-list img {
-    width: 2rem;
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    padding:0;
+    align-self: start;
+
+}
+
+.logo_facebook {
+    width: 2%;
+    height: 2%;
+}
+
+.logo_twitter {
+    width: 2.1%;
+    height: 2%;
+}
+
+.logo_flickr {
+    width: 2.2%;
+    height: 2%;
+}
+
+.logo_youtube {
+    width: 2.2%;
+    height: 2%;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-container input {
+    padding-right: 30px; 
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 4px;
     height: 2rem;
 }
+
+.search-container input::placeholder {
+    color: white;
+}
+
+.arrow {
+    position: absolute;
+    right: 80px; 
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 650;
+    transform: rotate(270deg);
+    cursor: pointer;
+}
+
+input {
+    width: 50%;
+}
+
+input::placeholder {
+    text-align: left;
+}
+
+.search-newsletter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto; 
+    padding-right: 2%;
+}
+
+.search-newsletter button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 0.5rem .7rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
 
 .Imagens_nav {
     width: 100%;

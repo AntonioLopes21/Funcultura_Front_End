@@ -32,6 +32,7 @@
 
 .main_content_section_title {
     font-size: 3rem;
+    white-space: nowrap;
     text-decoration: underline;
     text-underline-offset: 2rem;
     text-decoration-thickness: .1rem;
