@@ -43,7 +43,7 @@ Design responsivo (Em desenvolvimento)
 1. Abra o terminal e acesse a pasta do projeto:
 
 ```bash
-cd caminho/da/pasta/frontend
+cd CaminhoDaPasta/Fundarpe/fundarpe
 ```
 Instale as dependências:
 
