@@ -12,7 +12,7 @@ A aplicação já conta com a **página inicial implementada**, sendo o ponto de
 - [React](https://reactjs.org/)
 - HTML5
 - CSS3 (styled-components)
-- JavaScript
+- JavaScript (Em desenvolvimento)
 - React Router DOM (Em desenvolvimento - Não visual atualmente)
 - React UseStates (Em desenvolvimento - Não visual atualmente)
 
