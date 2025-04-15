@@ -58,4 +58,4 @@ Inicie o servidor de desenvolvimento:
 npm start```
 
 
-O projeto será executado em: http://localhost:{Porta do seu servidor}
+O projeto será executado em: http://localhost:{Porta_aberta}
