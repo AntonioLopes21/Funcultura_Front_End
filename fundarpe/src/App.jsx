@@ -1,14 +1,10 @@
-import Header from "./components/Header/Header";
 import "./App.css"
-import MainContent from "./components/MainContent/MainContent";
+import Router from "../src/routes/routes";
 
 function App() {
   return (
     <>
-      <section className="menu_principal">
-        <Header />
-        <MainContent/>
-      </section>
+      <Router />
     </>
   );
 }

@@ -2,9 +2,14 @@ import React from "react";
 import { ImagesProject } from "../../assets/Images";
 import "./MainContent.css"
 import Footer from "../Footer/Footer"
+import { useState } from "react";
 
+function DuplicarBtn() {
+}
 
 function MainContent() {
+    const [btnCadastrar, setDuplicateBtn] = useState("Cadastrar")
+
     return (
         <div className="general_content">
             <div className="main_content_section">
@@ -16,7 +21,7 @@ function MainContent() {
                 </div>
 
                 <div className="main_content_section_content_btn">
-                <button className="main_content_section_btn_cadastrar">Cadastrar</button>
+                <button className="main_content_section_btn_cadastrar" onClick={DuplicarBtn}>{btnCadastrar}</button>
                     <button className="main_content_section_btn_acompanhar">Acompanhar cadastro</button>
                     <button className="main_content_section_btn_atualizar">Atualizar cadastro</button>
                 </div>
