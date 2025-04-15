@@ -54,8 +54,8 @@ npm install
 Inicie o servidor de desenvolvimento:
 
 ```bash
-
-npm start```
+npm start
+```
 
 
 O projeto será executado em: http://localhost:{Porta_aberta}
