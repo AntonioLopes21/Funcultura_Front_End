@@ -42,5 +42,20 @@ Design responsivo (Em desenvolvimento)
 
 1. Abra o terminal e acesse a pasta do projeto:
 
+
+cd caminho/da/pasta/frontend
+
+Instale as dependências:
+
+
 ```bash
-cd caminho/da/pasta/frontend```
+npm install
+```
+Inicie o servidor de desenvolvimento:
+
+```bash
+
+npm start```
+
+
+O projeto será executado em: http://localhost:{Porta do seu servidor}
