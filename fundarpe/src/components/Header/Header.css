@@ -77,7 +77,6 @@ input::placeholder {
     align-items: center;
     justify-content: center;
     margin-left: auto; 
-    padding-right: 2%;
 }
 
 .search-newsletter button {
@@ -89,7 +88,6 @@ input::placeholder {
     font-size: 1rem;
     cursor: pointer;
 }
-
 
 .Imagens_nav {
     width: 100%;
