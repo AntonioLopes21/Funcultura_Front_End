@@ -25,12 +25,6 @@ A aplicação já conta com a **página inicial implementada**, sendo o ponto de
 - [Node.js](https://nodejs.org/) instalado
 - [npm](https://www.npmjs.com/) (ou [yarn](https://yarnpkg.com/)) instalado
 
-### Passos para rodar o projeto:
-
-1. Abra o terminal e acesse a pasta do projeto:
-
-```bash
-cd caminho/da/pasta/frontend```
 📌 Funcionalidades Esperadas (em desenvolvimento)
 Cadastro de Pessoa Física e Jurídica
 
@@ -42,4 +36,11 @@ Login com autenticação JWT
 
 Notificações de status
 
-Design responsivo
+Design responsivo (Em desenvolvimento)
+
+### Passos para rodar o projeto:
+
+1. Abra o terminal e acesse a pasta do projeto:
+
+```bash
+cd caminho/da/pasta/frontend```
