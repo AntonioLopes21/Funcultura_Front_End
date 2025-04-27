@@ -23,9 +23,8 @@ const Header = () => {
                     </ol>
                 </nav>
             </div>
-            <div className="funcultura">
-                <img className="Imagens_nav" src={ImagesProject.ImagemNav} alt="Logo" />
-            </div>
+            <img className="Imagens_nav" src={ImagesProject.FundarpeLogos} alt="Funcultura_logo" />
+                
         </>);
 };
 

@@ -1,5 +1,6 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import Home from "../pages/HomePage/Home"
+import PFFormsPage from "../pages/PFFormsPage/PFFormsPage"
 
 const Router = () => {
     return (
@@ -7,6 +8,7 @@ const Router = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
+                    <Route path="/formsPessoaFisica" element={<PFFormsPage/>}/>
                 </Routes>
             </BrowserRouter>
         </>
