@@ -15,10 +15,31 @@ function PFFormsPage() {
                 <div className="formulario">
 
                     <form>
-                        <input type="text" placeholder="Nome completo" />
-                        <input type="text" placeholder="CPF" />
-                        <input type="email" placeholder="E-mail" />
-                        <button type="submit">Enviar</button>
+                        <div className="form_primeira_coluna">
+                            <div className="form_primeira_coluna_nome_info">
+                                <h5>Nome completo</h5>
+                                <input type="text" placeholder="Nome completo" className="form_primeira_coluna_input_nome" />
+                            </div>
+                            <div className="form_primeira_coluna_data_info">
+                                <h5>Data de nascimento</h5>
+                                <input type="date" className="form_primeira_coluna_input_data" />
+                            </div>
+                        </div>
+
+                        <div className="form_segunda_coluna">
+                            <div className="form_segunda_coluna_cpf_info">
+                                <h5>CPF</h5>
+                                <input type="text" placeholder="CPF" className="form_segunda_coluna_input_cpf" />
+                            </div>
+                            <div className="form_segunda_coluna_email_info">
+                                <h5>Email</h5>
+                                <input type="email" placeholder="E-mail" className="form_segunda_coluna_input_email" />
+                            </div>
+                        </div>
+
+                        <div className="btn_cadastro_div">
+                            <button type="submit" className="btn_cadastro">Finalizar Cadastro</button>
+                        </div>
                     </form>
                 </div>
                 <Footer />
