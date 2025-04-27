@@ -1,12 +1,28 @@
+.main_content {
+    width: 90%;
+}
+
 .main_content_title {
     width: 100%;
-    font-size: 2rem;
+    font-size: 2.5rem;
     white-space: nowrap;
-    text-decoration: underline;
-    text-underline-offset: 1rem;
-    text-decoration-thickness: .0rem;
-    text-decoration-color: #000000;
     color: #28324E;
+}
+
+.main_content_line {
+    width: 50%;
+    height: 2px;
+    background-color: #000;
+    border: none;
+    margin-left: 0; 
+}
+
+.main_content_line2 {
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    border: none;
+    margin-left: 0; 
 }
 
 .main_content_subtitle {
@@ -14,6 +30,11 @@
     text-align: left;
     font-weight: 400;
 
+}
+
+.formulario {
+    justify-content: center;
+    width: 90%;
 }
 
 .form_primeira_coluna,
@@ -40,16 +61,70 @@
 }
 
 .form_segunda_coluna_input_email {
-    width: 31.1875rem;
+    width: 30.1840rem;
     height: 2.0625rem;
 
 }
 
 
 .formulario {
-    padding: 2%;
+    padding: 1%;
     display: flex;
     flex-direction: column;
+}
+
+/* campo de documentos para envio */
+.documentos_para_envio {
+    display: flex;
+    gap: 5%;
+}
+
+.documentos_para_envio_line hr{
+    height: .8px !important;
+}
+
+.documentos_para_envio_campos hr {
+    height: .2px;
+    background-color: #000;
+}
+
+.documentos_para_envio_campos p {
+    font-size: .7rem;
+}
+
+.documentos_para_envio_campos *{
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 2% !important;
+    justify-content: space-between;
+
+}
+
+.documentos_para_envio_campos_identidade {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.documentos_para_envio_campos_identidade_esquerda {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.documentos_para_envio_campos_identidade_direita {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.btn_documentos {
+    width: 9.625rem;
+    height: 1.8125rem;
+    background-color: #28324E;
+    color: #ffff;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
 }
 
 .btn_cadastro_div {
