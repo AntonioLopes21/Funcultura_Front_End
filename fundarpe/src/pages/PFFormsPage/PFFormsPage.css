@@ -1,0 +1,36 @@
+.main_content {
+    text-align: left;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.main_content_title {
+    width: 100%;
+    font-size: 2rem;
+    white-space: nowrap;
+    text-decoration: underline;
+    text-underline-offset: 1rem;
+    text-decoration-thickness: .0rem;
+    text-decoration-color: #000000;
+    color: #28324E;
+}
+
+.main_content_subtitle {
+    color: #28324E;
+    text-align: left;
+    font-weight: 400;
+
+}
+
+.formulario {
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    width: 100%;
+}
+footer img{
+    width: 100%;
+}
