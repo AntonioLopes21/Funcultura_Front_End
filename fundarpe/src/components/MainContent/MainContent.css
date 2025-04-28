@@ -21,6 +21,8 @@
     height: auto;
 }
 
+
+
 .main_content_section_content {
     width: 70%;
     display: flex;
@@ -44,9 +46,15 @@
     font-weight: 300;
 }
 
-.main_content_section_btn_cadastrar {
-    width: 18.75rem;
-    height: 5rem;
+.btn-cadastros {
+    display: flex;
+    gap: 15%;
+    justify-content: center;
+}
+
+.main_content_section_btn_pessoa_fisica, .main_content_section_btn_pessoa_juridica {
+    width: 20.75rem;
+    height: 4rem;
     font-size: 2rem;
     font-weight: 700;
     color: white;

@@ -58,7 +58,7 @@ function PFFormsPage() {
 
                             </div>
 
-                            <hr className="documentos_para_envio_line"/>
+                            <hr className="documentos_para_envio_line" />
                             <div className="documentos_para_envio_campos_identidade">
                                 <div className="documentos_para_envio_campos_identidade_esquerda">
                                     <h5>Comprovante de Residência</h5>
@@ -71,7 +71,7 @@ function PFFormsPage() {
 
                             </div>
 
-                            <hr className="documentos_para_envio_line"/><div className="documentos_para_envio_campos_identidade">
+                            <hr className="documentos_para_envio_line" /><div className="documentos_para_envio_campos_identidade">
                                 <div className="documentos_para_envio_campos_identidade_esquerda">
                                     <h5>Currículo de atuação cultural</h5>
                                     <p>(Somente arquivos em PDF)</p>
@@ -83,7 +83,7 @@ function PFFormsPage() {
 
                             </div>
 
-                            <hr className="documentos_para_envio_line"/><div className="documentos_para_envio_campos_identidade">
+                            <hr className="documentos_para_envio_line" /><div className="documentos_para_envio_campos_identidade">
                                 <div className="documentos_para_envio_campos_identidade_esquerda">
                                     <h5>Certidão de Regularidade Fiscal</h5>
                                     <p>(Somente arquivos em PDF)</p>
@@ -94,8 +94,8 @@ function PFFormsPage() {
                                 </div>
 
                             </div>
-                            <hr className="documentos_para_envio_line"/>
-                            
+                            <hr className="documentos_para_envio_line" />
+
                             <div className="documentos_para_envio_campos_identidade">
                                 <div className="documentos_para_envio_campos_identidade_esquerda">
                                     <h5>Certidão de Prestação de Contas do Funcultura</h5>
@@ -107,7 +107,11 @@ function PFFormsPage() {
                                 </div>
 
                             </div>
-                            <hr className="documentos_para_envio_line"/>
+                            <hr className="documentos_para_envio_line" />
+                            <div className="paragrafo_explicacao">
+                                <p className="paragrafo_info">Certidão de Regularidade Fiscal e de Prestação de contas são sobre **** e todo este processo pode ser editado/alterado posteriormente</p>
+
+                            </div>
                         </div>
                         <div className="btn_cadastro_div">
                             <button type="submit" className="btn_cadastro">Finalizar Cadastro</button>

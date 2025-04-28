@@ -85,7 +85,7 @@
 
 .documentos_para_envio_campos hr {
     height: .2px;
-    background-color: #000;
+    background-color: #535353;
 }
 
 .documentos_para_envio_campos p {
@@ -125,6 +125,14 @@
     color: #ffff;
     font-weight: 500;
     font-family: 'Inter', sans-serif;
+}
+
+.paragrafo_explicacao {
+    width: 50%;
+}
+
+.paragrafo_info {
+    color: red;
 }
 
 .btn_cadastro_div {
