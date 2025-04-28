@@ -127,6 +127,14 @@
     font-family: 'Inter', sans-serif;
 }
 
+.paragrafo_explicacao {
+    width: 50%;
+}
+
+.paragrafo_info {
+    color: red;
+}
+
 .btn_cadastro_div {
     display: flex;
     justify-content: center;
