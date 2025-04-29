@@ -5,6 +5,10 @@ import { ImagesProject } from "../../assets/Images";
 const Header = () => {
     return (
         <>
+            
+            <div className="funcultura">
+                <img className="Imagens_nav" src={ImagesProject.ImagemNav} alt="Logo" />
+            </div>
             <div className="navbar">
                 <nav>
                     <ol className="nav-list">
