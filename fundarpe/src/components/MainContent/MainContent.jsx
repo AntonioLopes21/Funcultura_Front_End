@@ -1,5 +1,20 @@
 import React from "react";
 import { ImagesProject } from "../../assets/Images";
+import "./MainContent.css";
+import Footer from "../Footer/Footer";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import necessário para navegar
+
+function DuplicarBtn() {
+}
+
+function MainContent() {
+    const [btnCadastrar, setDuplicateBtn] = useState("Cadastrar");
+    const navigate = useNavigate(); // Hook para navegação
+
+    const handleNavigateToLogin = () => {
+        navigate("/login"); // Rota para onde o botão vai levar
+    };
 import "./MainContent.css"
 import Footer from "../Footer/Footer"
 import { useState } from "react";
@@ -31,10 +46,29 @@ function MainContent() {
 
                 <div className="main_content_section_content">
                     <h1 className="main_content_section_title">CADASTRO DE PRODUTORES CULTURAIS</h1>
-                    <p className="main_content_section_paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lacus augue, interdum in ornare a, laoreet quis tortor. Nulla at sodales tortor. Fusce vel pellentesque odio. Nullam nec interdum metus. Nam sollicitudin, sapien at cursus molestie, nibh turpis mollis risus, nec finibus sapien odio in nibh. Suspendisse ultricies dui in ante aliquet, ac rhoncus lectus porta. Fusce congue justo nisi, rutrum luctus sapien tincidunt ut. Aliquam erat volutpat. Morbi pellentesque egestas arcu, sit amet tincidunt sem elementum a. </p>
+                    <p className="main_content_section_paragraph">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lacus augue,
+                        interdum in ornare a, laoreet quis tortor. Nulla at sodales tortor.
+                        Fusce vel pellentesque odio. Nullam nec interdum metus. Nam sollicitudin,
+                        sapien at cursus molestie, nibh turpis mollis risus, nec finibus sapien
+                        odio in nibh. Suspendisse ultricies dui in ante aliquet, ac rhoncus lectus porta.
+                        Fusce congue justo nisi, rutrum luctus sapien tincidunt ut.
+                        Aliquam erat volutpat. Morbi pellentesque egestas arcu,
+                        sit amet tincidunt sem elementum a.
+                    </p>
                 </div>
 
                 <div className="main_content_section_content_btn">
+                    <button className="main_content_section_btn_cadastrar" onClick={DuplicarBtn}>
+                        {btnCadastrar}
+                    </button>
+
+                    <button 
+                        className="main_content_section_btn_acompanhar"
+                        onClick={handleNavigateToLogin}
+                    >
+                        Acompanhar ou Atualizar Cadastro
+                    </button>
                     <div className="btn-cadastros">
                         {!mostrarOpcoes ? (
                             <button
@@ -71,7 +105,7 @@ function MainContent() {
                 <Footer />
             </div>
         </div>
-    )
+    );
 }
 
-export default MainContent
+export default MainContent;
