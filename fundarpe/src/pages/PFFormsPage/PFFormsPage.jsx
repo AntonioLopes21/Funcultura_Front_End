@@ -2,8 +2,20 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import "../PFFormsPage/PFFormsPage.css"
 import "../../components/MainContent/MainContent.css"
+import { useState } from "react";
+import Api from "../../services/api";
+
 
 function PFFormsPage() {
+    const [nomeCompleto, setNomeCompleto] = useState("");
+    const [dataNascimento, setDataNascimento] = useState("");
+    const [cpf, setCpf] = useState("");
+    const [email, setEmail] = useState("");
+
+    async function postUsers() {
+        await Api.post('users/create')
+    }
+
     return (
         <>
             <div className="menu_principal">

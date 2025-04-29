@@ -7,7 +7,6 @@ const Header = () => {
         <>
             
             <div className="funcultura">
-                <img className="Imagens_nav" src={ImagesProject.ImagemNav} alt="Logo" />
             </div>
             <div className="navbar">
                 <nav>

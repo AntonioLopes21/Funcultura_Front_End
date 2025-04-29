@@ -4,24 +4,15 @@ import "./MainContent.css";
 import Footer from "../Footer/Footer";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import necessário para navegar
-
-function DuplicarBtn() {
-}
+import "./MainContent.css"
 
 function MainContent() {
-    const [btnCadastrar, setDuplicateBtn] = useState("Cadastrar");
-    const navigate = useNavigate(); // Hook para navegação
 
     const handleNavigateToLogin = () => {
-        navigate("/login"); // Rota para onde o botão vai levar
-    };
-import "./MainContent.css"
-import Footer from "../Footer/Footer"
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+            navigate("/login"); // Rota para onde o botão vai levar
+        };
 
-function MainContent() {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Hook para navegação
 
     const [mostrarOpcoes, setMostrarOpcoes] = useState(false);
 
@@ -59,17 +50,8 @@ function MainContent() {
                 </div>
 
                 <div className="main_content_section_content_btn">
-                    <button className="main_content_section_btn_cadastrar" onClick={DuplicarBtn}>
-                        {btnCadastrar}
-                    </button>
-
-                    <button 
-                        className="main_content_section_btn_acompanhar"
-                        onClick={handleNavigateToLogin}
-                    >
-                        Acompanhar ou Atualizar Cadastro
-                    </button>
-                    <div className="btn-cadastros">
+                
+                    <div className="btn_cadastros">
                         {!mostrarOpcoes ? (
                             <button
                                 className="main_content_section_btn_cadastrar"
@@ -96,7 +78,7 @@ function MainContent() {
                     </div>
 
 
-                    <button className="main_content_section_btn_acompanhar">Acompanhar/Atualizar cadastro</button>
+                    <button className="main_content_section_btn_acompanhar" onClick={handleNavigateToLogin}>Acompanhar/Atualizar cadastro</button>
                 </div>
 
             </div>
