@@ -3,6 +3,7 @@ html, body, #root {
     display: flex;
     margin: 0;
     width: 100%;
+    background-color: rgb(255,253,254);
 }
 
 body {
