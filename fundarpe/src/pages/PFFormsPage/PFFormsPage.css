@@ -1,12 +1,33 @@
-.main_content {
-    width: 90%;
+/* RESET E ESTILOS GERAIS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
+.menu_principal {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* CONTAINER PRINCIPAL */
+.main_content {
+    width: 94%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 3% 0;
+    overflow-x: hidden;
+}
+
+/* CABEÇALHO E TÍTULOS */
 .main_content_title {
     width: 100%;
-    font-size: 2.5rem;
-    white-space: nowrap;
+    font-size: 2rem;
     color: #28324E;
+    margin-bottom: 1rem;
+    font-weight: 600;
 }
 
 .main_content_line {
@@ -14,7 +35,7 @@
     height: 2px;
     background-color: #000;
     border: none;
-    margin-left: 0; 
+    margin: 0.5rem 0 1.5rem;
 }
 
 .main_content_line2 {
@@ -22,139 +43,403 @@
     height: 2px;
     background-color: #000;
     border: none;
-    margin-left: 0; 
+    margin: 1.5rem 0;
 }
 
 .main_content_subtitle {
     color: #28324E;
     text-align: left;
     font-weight: 400;
-
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    padding-left: 3%;
 }
 
-.formulario {
-    justify-content: center;
-    width: 90%;
+.main_content_subtitle h3 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #28324E;
+    margin-bottom: 1rem;
 }
 
-.form_primeira_coluna,
-.form_segunda_coluna {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    gap: 20%;
-}
-
-.form_primeira_coluna_input_nome {
-    width: 34.375rem;
-    height: 2.0625rem;
-}
-
-.form_primeira_coluna_input_data {
-    width: 12.5rem;
-    height: 2.0625rem;
-}
-
-.form_segunda_coluna_input_cpf {
-    width: 16.5rem;
-    height: 2.0625rem;
-}
-
-.form_segunda_coluna_input_email {
-    width: 30.1840rem;
-    height: 2.0625rem;
-
-}
-
-
-.formulario {
-    padding: 1%;
+/* FORMULÁRIO */
+.formulario, 
+.main_content_forms {
+    width: 94%;
+    margin: 0 auto;
+    padding: 0 3%;
     display: flex;
     flex-direction: column;
 }
 
-/* campo de documentos para envio */
-.documentos_para_envio {
+.form_primeira_coluna,
+.form_segunda_coluna,
+.main_content_first_col {
+    width: 100%;
     display: flex;
-    gap: 5%;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-.documentos_para_envio_line hr{
-    height: .8px !important;
+.form_primeira_coluna_nome_info,
+.form_primeira_coluna_data_info,
+.form_segunda_coluna_cpf_info,
+.form_segunda_coluna_email_info,
+.main_content_first_col_left,
+.main_content_second_col_right,
+.main_content_forms_address {
+    width: 100%;
 }
 
-.documentos_para_envio_campos hr {
-    height: .2px;
-    background-color: #535353;
+.form_primeira_coluna_input_nome,
+.form_primeira_coluna_input_data,
+.form_segunda_coluna_input_cpf,
+.form_segunda_coluna_input_email,
+.main_content_forms_razao_social,
+.main_content_forms_cnpj,
+.main_content_forms_endereco_empresa {
+    width: 100%;
+    max-width: 100%;
+    height: 2.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-top: 0.5rem;
 }
 
-.documentos_para_envio_campos p {
-    font-size: .7rem;
+/* LINHAS DIVISÓRIAS */
+.break_line {
+    width: 94%;
+    height: 1px;
+    background-color: #333;
+    margin: 1.5rem auto;
 }
 
-.documentos_para_envio_campos *{
-    padding: 0 !important;
-    margin: 0 !important;
-    gap: 2% !important;
-    justify-content: space-between;
+/* SEÇÃO DE DIRIGENTES */
+.main_content_dirigentes {
+    width: 94%;
+    margin: 0 auto;
+    padding: 0 3%;
+}
 
+.dirigente-container {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+/* LINK ADICIONAR DIRIGENTE */
+.adicionar_dirigente {
+    padding-left: 3%;
+    margin: 1rem 0;
+}
+
+.adicionar_dirigente_novo {
+    color: #195DC2;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+}
+
+.adicionar_dirigente_novo:hover {
+    color: #0056b3;
+}
+
+.btn-remover-dirigente {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.btn-remover-dirigente:hover {
+    background-color: #c82333;
+}
+
+/* SEÇÃO DE DOCUMENTOS */
+.documentos_para_envio,
+.main_content_second_part {
+    margin: 1.5rem 0;
+    width: 94%;
+    padding: 0 3%;
+}
+
+.documentos_para_envio_campos {
+    width: 100%;
 }
 
 .documentos_para_envio_campos_identidade {
     display: flex;
-    flex-direction: row;
-    
-}
-
-.documentos_para_envio_campos_identidade_esquerda {
-    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    width: 100%;
+    margin: 1rem 0;
+    gap: 0.5rem;
 }
 
+.documentos_para_envio_campos_identidade_esquerda,
 .documentos_para_envio_campos_identidade_direita {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    width: 100%;
 }
 
-.btn_documentos {
-    width: 9.625rem;
-    height: 1.8125rem;
-    background-color: #28324E;
-    color: #ffff;
+.documentos_para_envio_campos_identidade h5 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
     font-weight: 500;
-    font-family: 'Inter', sans-serif;
 }
 
+.documentos_para_envio_campos p {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.documentos_para_envio_line {
+    height: 1px;
+    background-color: #ddd;
+    border: none;
+    margin: 1rem 0;
+}
+
+.main_content_subtitle_second_part {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #28324E;
+    margin-bottom: 1rem;
+}
+
+/* BOTÕES */
+.btn_documentos {
+    width: 100%;
+    max-width: 180px;
+    height: 2.0rem;
+    background-color: #28324E;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+    padding: 0 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* TEXTO EXPLICATIVO */
 .paragrafo_explicacao {
-    width: 50%;
+    width: 100%;
+    margin: 1.5rem 0;
+    padding: 0 3%;
 }
 
 .paragrafo_info {
     color: red;
+    font-size: 0.8rem;
 }
 
+.password-hint {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.2rem;
+}
+
+/* BOTÃO FINALIZAR */
 .btn_cadastro_div {
     display: flex;
     justify-content: center;
-    padding: 2%;
+    padding: 2% 0;
+    margin-top: 2rem;
+    width: 100%;
 }
 
 .btn_cadastro {
     background-color: #28324E;
     font-size: 1.1rem;
     color: #f5f5f5;
-    width: 12.9375rem;
-    height: 2.6875rem;
-    border-radius: .3rem;
+    width: 100%;
+    max-width: 300px;
+    height: 3rem;
+    border-radius: 0.3rem;
     font-weight: 500;
+    border: none;
+    cursor: pointer;
+    padding: 0.75rem 2rem;
 }
 
+/* FOOTER */
 footer {
     width: 100%;
+    margin-top: 2rem;
 }
 
 footer img {
     width: 100%;
+    height: auto;
+}
+
+/* MENSAGENS DE STATUS */
+.submit-message {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.submit-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.submit-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.file-info {
+    font-size: 0.8rem;
+    color: #555;
+    margin-top: 0.2rem;
+    font-style: italic;
+}
+
+.error {
+    border: 1px solid red !important;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+    display: block;
+}
+
+/* CAMPOS DE SENHA */
+.form_segunda_coluna_senha_info,
+.form_segunda_coluna_confirmar_senha_info {
+    width: 48%;
+    margin-bottom: 1rem;
+}
+
+.form_segunda_coluna_input_senha,
+.form_segunda_coluna_input_confirmar_senha {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* VERSÃO DESKTOP */
+@media (min-width: 768px) {
+    .main_content_title {
+        font-size: 2.5rem;
+    }
+    
+    .form_primeira_coluna,
+    .form_segunda_coluna,
+    .main_content_first_col {
+        flex-direction: row;
+        gap: 5%;
+    }
+    
+    .form_primeira_coluna_nome_info,
+    .main_content_first_col_left {
+        width: 65%;
+    }
+    
+    .form_primeira_coluna_data_info,
+    .main_content_second_col_right {
+        width: 30%;
+    }
+    
+    .form_segunda_coluna_cpf_info {
+        width: 35%;
+    }
+    
+    .form_segunda_coluna_email_info,
+    .main_content_forms_address {
+        width: 60%;
+    }
+    
+    .documentos_para_envio_campos_identidade {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start; /* Alterado de center para flex-start */
+    }
+    
+    .documentos_para_envio_campos_identidade_esquerda {
+        width: 60%;
+    }
+    
+    .documentos_para_envio_campos_identidade_direita {
+        width: 40%;
+        display: block; /* Alterado de flex para block */
+        text-align: right;
+    }
+    
+    .btn_documentos {
+        width: 160px;
+        margin: 0 0 0.3rem 0; /* Adicionado margin-bottom */
+        display: inline-flex; /* Mantém o alinhamento do texto */
+    }
+    
+    .documentos_para_envio_campos_identidade_direita p {
+        display: block;
+        margin: 0;
+    }
+    
+    .paragrafo_explicacao {
+        width: 50%;
+    }
+
+    .form_segunda_coluna_senha_info,
+    .form_segunda_coluna_confirmar_senha_info {
+        width: 48%;
+    }
+}
+
+/* AJUSTES PARA TELAS PEQUENAS */
+@media (max-width: 480px) {
+    .main_content {
+        width: 98%;
+        padding: 15px 1% 0;
+    }
+    
+    .main_content_title {
+        font-size: 1.7rem;
+    }
+    
+    .main_content_subtitle {
+        padding-left: 1%;
+    }
+    
+    .formulario,
+    .main_content_forms,
+    .documentos_para_envio,
+    .main_content_second_part,
+    .paragrafo_explicacao {
+        width: 98%;
+        padding: 0 1%;
+    }
+    
+    .btn_documentos {
+        max-width: 150px;
+        font-size: 0.8rem;
+    }
+
+    .form_segunda_coluna_senha_info,
+    .form_segunda_coluna_confirmar_senha_info {
+        width: 100%;
+    }
 }

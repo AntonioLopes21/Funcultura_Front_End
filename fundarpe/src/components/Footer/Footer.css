@@ -1,0 +1,8 @@
+footer img {
+    max-width: 100%; /* Limita a largura ao tamanho do container */
+    max-height: 200px; /* Define uma altura máxima (ajuste conforme necessário) */
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Centraliza a imagem */
+}

@@ -1,0 +1,63 @@
+.main_content_title {
+    width: 100%;
+    font-size: 2rem;
+    white-space: nowrap;
+    text-decoration: underline;
+    text-underline-offset: 1rem;
+    text-decoration-thickness: 0.1rem;
+    text-decoration-color: #000000;
+    color: #28324E;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .formulario {
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form_coluna_unica {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .form_campo_info h5 {
+    color: #28324E;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form_input_text {
+    width: 100%;
+    height: 2.0625rem;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    border: 1px solid #ccc;
+  }
+  
+  .btn_login_div {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  .btn_login {
+    background-color: #4CAF50;
+    font-size: 1.1rem;
+    color: #fff;
+    width: 12.9375rem;
+    height: 2.6875rem;
+    border-radius: 0.3rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn_login:hover {
+    background-color: #45a049;
+  }
+  
