@@ -9,8 +9,15 @@ import "./MainContent.css"
 function MainContent() {
 
     const handleNavigateToLogin = () => {
-            navigate("/login"); // Rota para onde o botão vai levar
-        };
+        navigate("/login"); // Rota para onde o botão vai levar
+    };
+
+
+    const handleClick = () => {
+        navigate('/formsPessoaFisica');
+
+    }
+
 
     const navigate = useNavigate(); // Hook para navegação
 
@@ -20,10 +27,6 @@ function MainContent() {
         setMostrarOpcoes(true);
     };
 
-    const handleClick = () => {
-        navigate('/formsPessoaFisica');
-
-    }
 
     const handleClickPJ = () => {
         navigate('/formsPessoaJuridica')
@@ -50,31 +53,21 @@ function MainContent() {
                 </div>
 
                 <div className="main_content_section_content_btn">
-                
-                    <div className="btn_cadastros">
-                        {!mostrarOpcoes ? (
-                            <button
-                                className="main_content_section_btn_cadastrar"
-                                onClick={handleClickCadastrar}
-                            >
-                                Cadastrar
-                            </button>
-                        ) : (
-                            <>
-                                <button
-                                    className="main_content_section_btn_pessoa_fisica"
-                                    onClick={handleClick}
-                                >
-                                    Pessoa Física
-                                </button>
-                                <button
-                                    className="main_content_section_btn_pessoa_juridica"
-                                    onClick={handleClickPJ}
-                                >
-                                    Pessoa Jurídica
-                                </button>
-                            </>
-                        )}
+
+                    <button className="main_content_section_btn_cadastrar" onClick={DuplicarBtn}>
+                        {btnCadastrar}
+                    </button>
+
+                    <button 
+                        className="main_content_section_btn_acompanhar"
+                        onClick={handleNavigateToLogin}
+                    >
+                        Acompanhar ou Atualizar Cadastro
+                    </button>
+
+                    <div className="btn-cadastros">
+                    <button className="main_content_section_btn_pessoa_fisica" onClick={() => handleClick()}>Pessoa Física</button>
+                    <button className="main_content_section_btn_pessoa_juridica" onClick={() => handleClickPJ()}>Pessoa Jurídica</button>
                     </div>
 
 

@@ -57,6 +57,7 @@
     width: 100%;
 }
 
+
 .btn_cadastros {
     width: 100%;
     display: flex;
@@ -70,6 +71,12 @@
     height: auto;
     min-height: 5rem;
     font-size: clamp(1.2rem, 3vw, 2rem); /* Tamanho responsivo */
+
+.btn-cadastros {
+    display: flex;
+    gap: 15%;
+    justify-content: center;
+}
 }
 
 .main_content_section_btn_pessoa_fisica, .main_content_section_btn_pessoa_juridica, .main_content_section_btn_cadastrar {
