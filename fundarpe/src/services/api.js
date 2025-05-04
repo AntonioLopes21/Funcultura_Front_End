@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:4000/api-docs',
+    baseURL: 'https://funcultura.fourdevs.com.br',
 })
 
 export default api;

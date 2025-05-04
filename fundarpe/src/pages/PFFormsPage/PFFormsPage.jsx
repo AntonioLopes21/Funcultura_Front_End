@@ -13,8 +13,15 @@ function PFFormsPage() {
     const [email, setEmail] = useState("");
 
     async function postUsers() {
-        await Api.post('users/create')
+        await Api.post('/login', {
+            nomeCompleto,
+            dataNascimento,
+            cpf,
+            email,
+            tipo_usuario: "fisico", 
+        });
     }
+
 
     return (
         <>
@@ -27,26 +34,29 @@ function PFFormsPage() {
                 <div className="formulario">
                     <h3 className="main_content_subtitle">Informações cadastrais</h3>
 
-                    <form>
+                    <form onSubmit={(e) => {
+                        e.preventDefault();
+                        postUsers();
+                    }}>
                         <div className="form_primeira_coluna">
                             <div className="form_primeira_coluna_nome_info">
                                 <h5>Nome completo</h5>
-                                <input type="text" placeholder="Nome completo" className="form_primeira_coluna_input_nome" />
+                                <input type="text" placeholder="Nome completo" value={nomeCompleto} onChange={(e) => setNomeCompleto(e.target.value)} className="form_primeira_coluna_input_nome" />
                             </div>
                             <div className="form_primeira_coluna_data_info">
                                 <h5>Data de nascimento</h5>
-                                <input type="date" className="form_primeira_coluna_input_data" />
+                                <input type="date" value={dataNascimento} onChange={(e) => setDataNascimento(e.target.value)} className="form_primeira_coluna_input_data" />
                             </div>
                         </div>
 
                         <div className="form_segunda_coluna">
                             <div className="form_segunda_coluna_cpf_info">
                                 <h5>CPF</h5>
-                                <input type="text" placeholder="CPF" className="form_segunda_coluna_input_cpf" />
+                                <input type="text" placeholder="CPF" value={cpf} onChange={(e) => setCpf(e.target.value)} className="form_segunda_coluna_input_cpf" />
                             </div>
                             <div className="form_segunda_coluna_email_info">
                                 <h5>Email</h5>
-                                <input type="email" placeholder="E-mail" className="form_segunda_coluna_input_email" />
+                                <input type="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} className="form_segunda_coluna_input_email" />
                             </div>
                         </div>
 
