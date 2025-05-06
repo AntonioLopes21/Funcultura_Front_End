@@ -57,26 +57,22 @@
     width: 100%;
 }
 
-
-.btn_cadastros {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    gap: 10%;
-}
-
 .main_content_section_btn_cadastrar {
     width: 100%;
-    max-width: 18.75rem;
+    max-width: 22.75rem;
     height: auto;
+    justify-content: center;
+    align-items: center;
     min-height: 5rem;
     font-size: clamp(1.2rem, 3vw, 2rem); /* Tamanho responsivo */
+}
 
 .btn-cadastros {
+    width: 32rem;
     display: flex;
+    flex-direction: row;
     gap: 15%;
     justify-content: center;
-}
 }
 
 .main_content_section_btn_pessoa_fisica, .main_content_section_btn_pessoa_juridica, .main_content_section_btn_cadastrar {
@@ -96,6 +92,8 @@
 .main_content_section_content_btn {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 1.5rem;
     padding: 5%;
     width: 100%;

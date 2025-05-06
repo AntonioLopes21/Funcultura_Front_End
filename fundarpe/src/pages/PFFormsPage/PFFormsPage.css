@@ -30,6 +30,7 @@
     font-weight: 600;
 .main_content {
     width: 90%;
+} 
 }
 
 .main_content_title {
@@ -187,7 +188,6 @@
 
 .documentos_para_envio_campos {
     width: 100%;
-=======
 
 }
 
@@ -320,7 +320,6 @@
     width: 100%;
     margin: 1.5rem 0;
     padding: 0 3%;
-=======
     flex-direction: row;
     
 }

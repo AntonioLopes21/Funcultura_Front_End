@@ -3,6 +3,7 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import "../PFFormsPage/PFFormsPage.css";
 import "../../components/MainContent/MainContent.css";
+import api from "../../services/api";
 
 function PFFormsPage() {
     // Estados para os campos do formulário
@@ -12,7 +13,9 @@ function PFFormsPage() {
         cpf: '',
         email: '',
         senha: '',
+        endereco: '',
         confirmarSenha: '',
+        tipoUsuario: 'fisico',
         documentos: {
             identidade: null,
             comprovanteResidencia: null,
@@ -40,9 +43,9 @@ function PFFormsPage() {
 
     // Função para formatar CPF
     const formatCPF = (value) => {
-        const cleaned = value.replace(/\D/g, '');
-        
+        const cleaned = value.replace(/\D/g, '');  // Remove todos os caracteres não numéricos
         let formatted = cleaned;
+
         if (cleaned.length > 3) {
             formatted = `${cleaned.slice(0, 3)}.${cleaned.slice(3)}`;
         }
@@ -52,36 +55,35 @@ function PFFormsPage() {
         if (cleaned.length > 9) {
             formatted = `${formatted.slice(0, 11)}-${formatted.slice(11, 13)}`;
         }
-        
-        return formatted.slice(0, 14);
+
+        return formatted.slice(0, 14);  // Limita para o formato correto
     };
 
     // Função para validar CPF
     const validateCPF = (cpf) => {
-        cpf = cpf.replace(/[^\d]+/g, '');
+        cpf = cpf.replace(/[^\d]+/g, '');  // Remove qualquer caractere não numérico
         if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
-        
-        // Validação dos dígitos verificadores
+
         let sum = 0;
         let remainder;
-        
+
         for (let i = 1; i <= 9; i++) {
-            sum += parseInt(cpf.substring(i-1, i)) * (11 - i);
+            sum += parseInt(cpf.substring(i - 1, i)) * (11 - i);
         }
-        
+
         remainder = (sum * 10) % 11;
         if ((remainder === 10) || (remainder === 11)) remainder = 0;
         if (remainder !== parseInt(cpf.substring(9, 10))) return false;
-        
+
         sum = 0;
         for (let i = 1; i <= 10; i++) {
-            sum += parseInt(cpf.substring(i-1, i)) * (12 - i);
+            sum += parseInt(cpf.substring(i - 1, i)) * (12 - i);
         }
-        
+
         remainder = (sum * 10) % 11;
         if ((remainder === 10) || (remainder === 11)) remainder = 0;
         if (remainder !== parseInt(cpf.substring(10, 11))) return false;
-        
+
         return true;
     };
 
@@ -103,7 +105,7 @@ function PFFormsPage() {
         const today = new Date();
         const age = today.getFullYear() - birthDate.getFullYear();
         const monthDiff = today.getMonth() - birthDate.getMonth();
-        
+
         if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
             return age - 1;
         }
@@ -113,14 +115,16 @@ function PFFormsPage() {
     // Handler para mudanças nos campos
     const handleChange = (e) => {
         const { name, value } = e.target;
-        
+
         if (name === 'cpf') {
+            // Formata o CPF enquanto o usuário digita
             const formattedValue = formatCPF(value);
             setFormData(prev => ({
                 ...prev,
                 [name]: formattedValue
             }));
-            
+
+            // Valida o CPF
             if (formattedValue.replace(/\D/g, '').length === 11 && !validateCPF(formattedValue)) {
                 setErrors(prev => ({ ...prev, cpf: 'CPF inválido' }));
             } else {
@@ -128,13 +132,13 @@ function PFFormsPage() {
             }
             return;
         }
-        
+
         setFormData(prev => ({
             ...prev,
             [name]: value
         }));
 
-        // Validação em tempo real
+        // Validação em tempo real para outros campos
         if (name === 'email' && value && !validateEmail(value)) {
             setErrors(prev => ({ ...prev, email: 'Email inválido' }));
         } else if (name === 'dataNascimento' && value) {
@@ -165,7 +169,7 @@ function PFFormsPage() {
                 alert('O arquivo deve ter no máximo 5MB');
                 return;
             }
-            
+
             setFormData(prev => ({
                 ...prev,
                 documentos: {
@@ -228,40 +232,58 @@ function PFFormsPage() {
         return valid;
     };
 
-    // Handler para envio do formulário
+    // Função de envio - antes de enviar o CPF, removemos a formatação
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
+        // Limpa o CPF de qualquer formatação antes de enviar
+        const cpfParaEnviar = formData.cpf.replace(/\D/g, '');  // Remove formatação (.) e (-)
+
+        // Validação do formulário
         if (validateForm()) {
             try {
-                // Simulando chamada à API
+                // Extraindo dados sem campos que não precisam ser enviados
+                const { confirmarSenha, tipoUsuario, documentos, ...userPayload } = formData;
+                const userTipo = tipoUsuario || "fisico";
+                
+                // Formata a data de nascimento para o formato correto (YYYY-MM-DD)
+                const formattedBirthDate = new Date(formData.dataNascimento).toISOString().split('T')[0];
+
+                const payload = {
+                    nome_completo: userPayload.nomeCompleto,
+                    data_nascimento: formattedBirthDate,
+                    cpf: cpfParaEnviar,
+                    email: userPayload.email,
+                    senha: userPayload.senha,
+                    endereco: userPayload.endereco || "Endereço Fictício",
+                    tipo_usuario: userTipo
+                };
+
+                console.log("Payload enviado: ", payload);  // Verifique o payload
+
                 setSubmitStatus({ message: 'Enviando dados...', isSuccess: true });
-                
-                // Aqui você faria a chamada real para a API:
-                // const response = await axios.post('/api/cadastro', formData);
-                
+
+                // Envio da requisição para a API
+                const response = await api.post('/user/create', payload);
+
                 // Simulando delay de rede
                 await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                setSubmitStatus({ 
-                    message: 'Cadastro realizado com sucesso!', 
-                    isSuccess: true 
+
+                setSubmitStatus({
+                    message: 'Cadastro realizado com sucesso!',
+                    isSuccess: true
                 });
-                
-                // Limpar formulário após sucesso (opcional)
-                // setFormData({ ...initialFormState });
-                
             } catch (error) {
-                setSubmitStatus({ 
-                    message: 'Erro ao cadastrar. Tente novamente.', 
-                    isSuccess: false 
+                console.error("Erro no cadastro:", error.response?.data || error.message);
+                setSubmitStatus({
+                    message: 'Erro ao cadastrar. Tente novamente.',
+                    isSuccess: false
                 });
-                console.error('Erro no cadastro:', error);
             }
         } else {
-            setSubmitStatus({ 
-                message: 'Por favor, corrija os erros no formulário.', 
-                isSuccess: false 
+            setSubmitStatus({
+                message: 'Por favor, corrija os erros no formulário.',
+                isSuccess: false
             });
         }
     };
@@ -273,7 +295,7 @@ function PFFormsPage() {
                 <h1 className="main_content_title">Cadastro Pessoa Física</h1>
                 <hr className="main_content_line" />
             </div>
-            
+
             <div className="formulario">
                 <h3 className="main_content_subtitle">Informações cadastrais</h3>
 
@@ -288,10 +310,10 @@ function PFFormsPage() {
                     <div className="form_primeira_coluna">
                         <div className="form_primeira_coluna_nome_info">
                             <h5>Nome completo</h5>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 name="nomeCompleto"
-                                placeholder="Nome completo" 
+                                placeholder="Nome completo"
                                 className={`form_primeira_coluna_input_nome ${errors.nomeCompleto ? 'error' : ''}`}
                                 value={formData.nomeCompleto}
                                 onChange={handleChange}
@@ -300,8 +322,8 @@ function PFFormsPage() {
                         </div>
                         <div className="form_primeira_coluna_data_info">
                             <h5>Data de nascimento</h5>
-                            <input 
-                                type="date" 
+                            <input
+                                type="date"
                                 name="dataNascimento"
                                 className={`form_primeira_coluna_input_data ${errors.dataNascimento ? 'error' : ''}`}
                                 value={formData.dataNascimento}
@@ -314,10 +336,10 @@ function PFFormsPage() {
                     <div className="form_segunda_coluna">
                         <div className="form_segunda_coluna_cpf_info">
                             <h5>CPF</h5>
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 name="cpf"
-                                placeholder="000.000.000-00" 
+                                placeholder="000.000.000-00"
                                 className={`form_segunda_coluna_input_cpf ${errors.cpf ? 'error' : ''}`}
                                 value={formData.cpf}
                                 onChange={handleChange}
@@ -327,10 +349,10 @@ function PFFormsPage() {
                         </div>
                         <div className="form_segunda_coluna_email_info">
                             <h5>Email</h5>
-                            <input 
-                                type="email" 
+                            <input
+                                type="email"
                                 name="email"
-                                placeholder="E-mail" 
+                                placeholder="E-mail"
                                 className={`form_segunda_coluna_input_email ${errors.email ? 'error' : ''}`}
                                 value={formData.email}
                                 onChange={handleChange}
@@ -343,10 +365,10 @@ function PFFormsPage() {
                     <div className="form_segunda_coluna">
                         <div className="form_segunda_coluna_senha_info">
                             <h5>Senha</h5>
-                            <input 
-                                type="password" 
+                            <input
+                                type="password"
                                 name="senha"
-                                placeholder="Senha" 
+                                placeholder="Senha"
                                 className={`form_segunda_coluna_input_senha ${errors.senha ? 'error' : ''}`}
                                 value={formData.senha}
                                 onChange={handleChange}
@@ -356,10 +378,10 @@ function PFFormsPage() {
                         </div>
                         <div className="form_segunda_coluna_confirmar_senha_info">
                             <h5>Confirmar Senha</h5>
-                            <input 
-                                type="password" 
+                            <input
+                                type="password"
                                 name="confirmarSenha"
-                                placeholder="Confirmar senha" 
+                                placeholder="Confirmar senha"
                                 className={`form_segunda_coluna_input_confirmar_senha ${errors.confirmarSenha ? 'error' : ''}`}
                                 value={formData.confirmarSenha}
                                 onChange={handleChange}
@@ -385,8 +407,8 @@ function PFFormsPage() {
                             <div className="documentos_para_envio_campos_identidade_direita">
                                 <label className="btn_documentos documento_pessoal">
                                     Adicionar arquivo
-                                    <input 
-                                        type="file" 
+                                    <input
+                                        type="file"
                                         accept=".pdf"
                                         style={{ display: 'none' }}
                                         onChange={(e) => handleFileUpload(e, 'identidade')}
@@ -410,8 +432,8 @@ function PFFormsPage() {
                             <div className="documentos_para_envio_campos_identidade_direita">
                                 <label className="btn_documentos comprovante_residencia">
                                     Adicionar arquivo
-                                    <input 
-                                        type="file" 
+                                    <input
+                                        type="file"
                                         accept=".pdf"
                                         style={{ display: 'none' }}
                                         onChange={(e) => handleFileUpload(e, 'comprovanteResidencia')}
@@ -435,8 +457,8 @@ function PFFormsPage() {
                             <div className="documentos_para_envio_campos_identidade_direita">
                                 <label className="btn_documentos curriculo_atuacao">
                                     Adicionar arquivo
-                                    <input 
-                                        type="file" 
+                                    <input
+                                        type="file"
                                         accept=".pdf"
                                         style={{ display: 'none' }}
                                         onChange={(e) => handleFileUpload(e, 'curriculoAtuacao')}
@@ -460,8 +482,8 @@ function PFFormsPage() {
                             <div className="documentos_para_envio_campos_identidade_direita">
                                 <label className="btn_documentos certidao_regularidade">
                                     Adicionar arquivo
-                                    <input 
-                                        type="file" 
+                                    <input
+                                        type="file"
                                         accept=".pdf"
                                         style={{ display: 'none' }}
                                         onChange={(e) => handleFileUpload(e, 'certidaoRegularidade')}
@@ -485,8 +507,8 @@ function PFFormsPage() {
                             <div className="documentos_para_envio_campos_identidade_direita">
                                 <label className="btn_documentos certidao_prestacao">
                                     Adicionar arquivo
-                                    <input 
-                                        type="file" 
+                                    <input
+                                        type="file"
                                         accept=".pdf"
                                         style={{ display: 'none' }}
                                         onChange={(e) => handleFileUpload(e, 'certidaoPrestacao')}
@@ -503,7 +525,7 @@ function PFFormsPage() {
 
                         <div className="paragrafo_explicacao">
                             <p className="paragrafo_info">
-                                Certidão de Regularidade Fiscal e de Prestação de contas são sobre **** 
+                                Certidão de Regularidade Fiscal e de Prestação de contas são sobre ****
                                 e todo este processo pode ser editado/alterado posteriormente
                             </p>
                         </div>

@@ -54,21 +54,24 @@ function MainContent() {
 
                 <div className="main_content_section_content_btn">
 
-                    <button className="main_content_section_btn_cadastrar" onClick={DuplicarBtn}>
-                        {btnCadastrar}
-                    </button>
+                    {!mostrarOpcoes && (
+                        <button className="main_content_section_btn_cadastrar" onClick={handleClickCadastrar}>
+                            Cadastrar
+                        </button>
+                    )}
 
-                    <button 
-                        className="main_content_section_btn_acompanhar"
-                        onClick={handleNavigateToLogin}
-                    >
-                        Acompanhar ou Atualizar Cadastro
-                    </button>
 
-                    <div className="btn-cadastros">
-                    <button className="main_content_section_btn_pessoa_fisica" onClick={() => handleClick()}>Pessoa Física</button>
-                    <button className="main_content_section_btn_pessoa_juridica" onClick={() => handleClickPJ()}>Pessoa Jurídica</button>
-                    </div>
+                    {mostrarOpcoes && (
+                        <div className="btn-cadastros">
+                            <button className="main_content_section_btn_pessoa_fisica" onClick={handleClick}>
+                                Pessoa Física
+                            </button>
+                            <button className="main_content_section_btn_pessoa_juridica" onClick={handleClickPJ}>
+                                Pessoa Jurídica
+                            </button>
+                        </div>
+                    )}
+
 
 
                     <button className="main_content_section_btn_acompanhar" onClick={handleNavigateToLogin}>Acompanhar/Atualizar cadastro</button>
