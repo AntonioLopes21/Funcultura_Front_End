@@ -234,22 +234,13 @@ function PFFormsPage() {
         
         if (validateForm()) {
             try {
-                // Simulando chamada à API
                 setSubmitStatus({ message: 'Enviando dados...', isSuccess: true });
                 
-                // Aqui você faria a chamada real para a API:
-                // const response = await axios.post('/api/cadastro', formData);
-                
-                // Simulando delay de rede
+                // Simulando chamada à API
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 
-                setSubmitStatus({ 
-                    message: 'Cadastro realizado com sucesso!', 
-                    isSuccess: true 
-                });
-                
-                // Limpar formulário após sucesso (opcional)
-                // setFormData({ ...initialFormState });
+                // Redireciona para a página de sucesso após cadastro
+                window.location.href = '/cadastro-sucesso';
                 
             } catch (error) {
                 setSubmitStatus({ 
