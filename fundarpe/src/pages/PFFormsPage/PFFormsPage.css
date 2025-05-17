@@ -562,3 +562,49 @@ footer img {
         width: 100%;
     }
 }
+/* Estilos para a página de sucesso */
+.success-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    min-height: 60vh;
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: #4CAF50;
+    margin-bottom: 1.5rem;
+}
+
+.success-message {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #28324E;
+}
+
+.success-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .success-page {
+        padding: 1rem;
+    }
+    
+    .success-icon {
+        font-size: 3rem;
+    }
+    
+    .success-message {
+        font-size: 1rem;
+    }
+    
+    .success-actions {
+        flex-direction: column;
+    }
+}

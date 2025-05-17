@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { ImagesProject } from "../../assets/Images";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function IdentificacaoPage() {
+function EsqueciSenhaPage() {
     const [cpf, setCpf] = useState("");
-    const [senha, setSenha] = useState("");
+    const [email, setEmail] = useState("");
     const [erro, setErro] = useState("");
+    const [sucesso, setSucesso] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    // Formatação do CPF
+    // Formatação do CPF (mesma função da página de login)
     const formatarCPF = (value) => {
         const numeros = value.replace(/\D/g, "");
         let formatado = "";
@@ -22,14 +23,14 @@ function IdentificacaoPage() {
         return formatado;
     };
 
-    // Autenticação mock
-    const mockAutenticacao = (cpf, senha) => {
-        const credenciaisValidas = [
-            { cpf: "123.456.789-09", senha: "senha123" },
-            { cpf: "111.222.333-44", senha: "funcultura" }
+    // Mock de verificação de usuário
+    const mockVerificarUsuario = (cpf, email) => {
+        const usuarios = [
+            { cpf: "123.456.789-09", email: "usuario1@exemplo.com" },
+            { cpf: "111.222.333-44", email: "usuario2@exemplo.com" }
         ];
-        return credenciaisValidas.some(
-            (credencial) => credencial.cpf === cpf && credencial.senha === senha
+        return usuarios.some(
+            (usuario) => usuario.cpf === cpf && usuario.email === email
         );
     };
 
@@ -37,13 +38,13 @@ function IdentificacaoPage() {
         e.preventDefault();
         setLoading(true);
         setErro("");
+        setSucesso("");
 
         setTimeout(() => {
-            if (mockAutenticacao(cpf, senha)) {
-                localStorage.setItem("usuarioAutenticado", "true");
-                navigate("/dashboard");
+            if (mockVerificarUsuario(cpf, email)) {
+                setSucesso("Um e-mail com instruções para redefinir sua senha foi enviado.");
             } else {
-                setErro("CPF ou senha incorretos");
+                setErro("CPF ou e-mail não encontrados. Verifique os dados informados.");
             }
             setLoading(false);
         }, 1500);
@@ -70,7 +71,7 @@ function IdentificacaoPage() {
                         textDecoration: "underline", 
                         textUnderlineOffset: "1rem" 
                     }}>
-                        IDENTIFICAÇÃO
+                        RECUPERAÇÃO DE SENHA
                     </h1>
                 </div>
 
@@ -112,19 +113,19 @@ function IdentificacaoPage() {
                             />
                         </div>
 
-                        {/* Campo Senha */}
+                        {/* Campo E-mail */}
                         <div>
                             <h5 style={{ 
                                 color: "#28324E", 
                                 marginBottom: "0.5rem" 
                             }}>
-                                Senha
+                                E-mail Cadastrado
                             </h5>
                             <input
-                                type="password"
-                                placeholder="Digite sua senha"
-                                value={senha}
-                                onChange={(e) => setSenha(e.target.value)}
+                                type="email"
+                                placeholder="Digite seu e-mail"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 style={{
                                     width: "100%",
                                     height: "2.0625rem",
@@ -149,7 +150,19 @@ function IdentificacaoPage() {
                         </p>
                     )}
 
-                    {/* Botão de Confirmar */}
+                    {/* Mensagem de sucesso */}
+                    {sucesso && (
+                        <p style={{ 
+                            color: "green", 
+                            textAlign: "center", 
+                            marginTop: "1rem",
+                            fontSize: "0.9rem"
+                        }}>
+                            {sucesso}
+                        </p>
+                    )}
+
+                    {/* Botão de Enviar */}
                     <div style={{ 
                         display: "flex", 
                         justifyContent: "center", 
@@ -171,14 +184,17 @@ function IdentificacaoPage() {
                                 transition: "background-color 0.3s"
                             }}
                         >
-                            {loading ? "Carregando..." : "Confirmar"}
+                            {loading ? "Carregando..." : "Enviar"}
                         </button>
                     </div>
 
-                    {/* Link "Esqueceu a senha?" */}
-                    <div style={{ textAlign: "center", marginTop: "1rem" }}>
-                        <Link 
-                            to="/esqueci-senha"
+                    {/* Link para voltar ao login */}
+                    <div style={{ 
+                        textAlign: "center", 
+                        marginTop: "1rem" 
+                    }}>
+                        <a 
+                            href="/login" 
                             style={{ 
                                 color: "#28324E", 
                                 textDecoration: "none",
@@ -186,8 +202,8 @@ function IdentificacaoPage() {
                                 fontStyle: "italic"
                             }}
                         >
-                            Esqueceu a senha?
-                        </Link>
+                            Voltar para o login
+                        </a>
                     </div>
                 </form>
 
@@ -197,4 +213,4 @@ function IdentificacaoPage() {
     );
 }
 
-export default IdentificacaoPage;
+export default EsqueciSenhaPage;

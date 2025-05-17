@@ -431,14 +431,10 @@ function PJFormsPage() {
                 setSubmitStatus({ message: 'Enviando dados...', isSuccess: true });
                 
                 // Simulação de chamada à API
-                console.log('Dados do formulário:', formData);
-                
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 
-                setSubmitStatus({ 
-                    message: 'Cadastro realizado com sucesso!', 
-                    isSuccess: true 
-                });
+                // Redireciona para a página de sucesso após cadastro
+                window.location.href = '/cadastro-sucesso';
                 
             } catch (error) {
                 setSubmitStatus({ 
