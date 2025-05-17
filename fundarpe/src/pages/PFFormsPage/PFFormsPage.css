@@ -28,6 +28,16 @@
     color: #28324E;
     margin-bottom: 1rem;
     font-weight: 600;
+.main_content {
+    width: 90%;
+} 
+}
+
+.main_content_title {
+    width: 100%;
+    font-size: 2.5rem;
+    white-space: nowrap;
+    color: #28324E;
 }
 
 .main_content_line {
@@ -36,6 +46,7 @@
     background-color: #000;
     border: none;
     margin: 0.5rem 0 1.5rem;
+    margin-left: 0; 
 }
 
 .main_content_line2 {
@@ -44,6 +55,7 @@
     background-color: #000;
     border: none;
     margin: 1.5rem 0;
+    margin-left: 0; 
 }
 
 .main_content_subtitle {
@@ -176,6 +188,75 @@
 
 .documentos_para_envio_campos {
     width: 100%;
+
+}
+
+.formulario {
+    justify-content: center;
+    width: 90%;
+}
+
+.form_primeira_coluna,
+.form_segunda_coluna {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20%;
+}
+
+.form_primeira_coluna_input_nome {
+    width: 34.375rem;
+    height: 2.0625rem;
+}
+
+.form_primeira_coluna_input_data {
+    width: 12.5rem;
+    height: 2.0625rem;
+}
+
+.form_segunda_coluna_input_cpf {
+    width: 16.5rem;
+    height: 2.0625rem;
+}
+
+.form_segunda_coluna_input_email {
+    width: 30.1840rem;
+    height: 2.0625rem;
+
+}
+
+
+.formulario {
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* campo de documentos para envio */
+.documentos_para_envio {
+    display: flex;
+    gap: 5%;
+}
+
+.documentos_para_envio_line hr{
+    height: .8px !important;
+}
+
+.documentos_para_envio_campos hr {
+    height: .2px;
+    background-color: #535353;
+}
+
+.documentos_para_envio_campos p {
+    font-size: .7rem;
+}
+
+.documentos_para_envio_campos *{
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 2% !important;
+    justify-content: space-between;
+
 }
 
 .documentos_para_envio_campos_identidade {
@@ -239,6 +320,33 @@
     width: 100%;
     margin: 1.5rem 0;
     padding: 0 3%;
+    flex-direction: row;
+    
+}
+
+.documentos_para_envio_campos_identidade_esquerda {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.documentos_para_envio_campos_identidade_direita {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.btn_documentos {
+    width: 9.625rem;
+    height: 1.8125rem;
+    background-color: #28324E;
+    color: #ffff;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+}
+
+.paragrafo_explicacao {
+    width: 50%;
 }
 
 .paragrafo_info {
@@ -261,6 +369,12 @@
     width: 100%;
 }
 
+.btn_cadastro_div {
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+}
+
 .btn_cadastro {
     background-color: #28324E;
     font-size: 1.1rem;
@@ -279,7 +393,12 @@
 footer {
     width: 100%;
     margin-top: 2rem;
+    width: 12.9375rem;
+    height: 2.6875rem;
+    border-radius: .3rem;
+    font-weight: 500;
 }
+
 
 footer img {
     width: 100%;
