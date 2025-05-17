@@ -34,19 +34,19 @@ function IdentificacaoPage() {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setErro("");
+    e.preventDefault();
+    setLoading(true);
+    setErro("");
 
-        setTimeout(() => {
-            if (mockAutenticacao(cpf, senha)) {
-                localStorage.setItem("usuarioAutenticado", "true");
-                navigate("/dashboard");
-            } else {
-                setErro("CPF ou senha incorretos");
-            }
-            setLoading(false);
-        }, 1500);
+    setTimeout(() => {
+        if (mockAutenticacao(cpf, senha)) {
+            localStorage.setItem("usuarioAutenticado", "true");
+            navigate("/acompanhamento"); // Alterado de "/dashboard" para "/acompanhamento"
+        } else {
+            setErro("CPF ou senha incorretos");
+        }
+        setLoading(false);
+    }, 1500);
     };
 
     return (

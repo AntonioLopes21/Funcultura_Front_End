@@ -60,4 +60,25 @@
   .btn_login:hover {
     background-color: #45a049;
   }
-  
+  /* Você pode reutilizar as classes existentes ou adicionar estas: */
+
+.link_voltar {
+  color: #28324E;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-style: italic;
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.link_voltar:hover {
+  text-decoration: underline;
+}
+
+.mensagem_sucesso {
+  color: green;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
