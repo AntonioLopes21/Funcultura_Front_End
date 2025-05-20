@@ -18,16 +18,17 @@ function LoginPage() {
         setLoading(true);
 
         try {
-            const formData = new FormData();
-            formData.append('email', email);
-            formData.append('senha', senha);
-            formData.append('key', API_KEY);
+            const payload = {
+                email: email,
+                senha: senha,
+                key: API_KEY
+            };
 
             console.log("Tentando login com dados do formulário");
             
-            const response = await api.post('/login', formData, {
+            const response = await api.post('/login', payload, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'application/json'
                 }
             });
             console.log("Resposta:", response.data);
@@ -39,12 +40,7 @@ function LoginPage() {
                 navigate("/dashboard");
             }
         } catch (error) {
-            console.error("Erro detalhado:", {
-                data: error.response?.data,
-                status: error.response?.status,
-                headers: error.response?.headers,
-                message: error.response?.data?.message || error.response?.data?.conteudoJson?.message
-            });
+            console.error("Erro detalhado:", error.response?.data);
             setErro(error.response?.data?.message || error.response?.data?.conteudoJson?.message || "Erro ao fazer login");
         } finally {
             setLoading(false);

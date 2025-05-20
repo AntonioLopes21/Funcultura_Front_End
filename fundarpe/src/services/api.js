@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Chave da API
-export const API_KEY = "dsh&*osoi28gf21020k&!(";
+export const API_KEY = "g3z35#HSP#eeXU";
 
 const api = axios.create({
     baseURL: 'https://funcultura.fourdevs.com.br',
