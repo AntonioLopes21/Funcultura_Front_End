@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { ImagesProject } from "../../assets/Images";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import api, { API_KEY } from "../../services/api";
 
 function LoginPage() {
