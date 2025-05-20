@@ -2,51 +2,49 @@ import React, { useState } from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { ImagesProject } from "../../assets/Images";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import api, { API_KEY } from "../../services/api";
 
-function IdentificacaoPage() {
-    const [cpf, setCpf] = useState("");
+function LoginPage() {
+    const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [erro, setErro] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    // Formatação do CPF
-    const formatarCPF = (value) => {
-        const numeros = value.replace(/\D/g, "");
-        let formatado = "";
-        if (numeros.length > 0) formatado = numeros.substring(0, 3);
-        if (numeros.length > 3) formatado += "." + numeros.substring(3, 6);
-        if (numeros.length > 6) formatado += "." + numeros.substring(6, 9);
-        if (numeros.length > 9) formatado += "-" + numeros.substring(9, 11);
-        return formatado;
-    };
-
-    // Autenticação mock
-    const mockAutenticacao = (cpf, senha) => {
-        const credenciaisValidas = [
-            { cpf: "123.456.789-09", senha: "senha123" },
-            { cpf: "111.222.333-44", senha: "funcultura" }
-        ];
-        return credenciaisValidas.some(
-            (credencial) => credencial.cpf === cpf && credencial.senha === senha
-        );
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
         setErro("");
+        setLoading(true);
 
-        setTimeout(() => {
-            if (mockAutenticacao(cpf, senha)) {
-                localStorage.setItem("usuarioAutenticado", "true");
+        try {
+            const payload = {
+                email: email,
+                senha: senha,
+                key: API_KEY
+            };
+
+            console.log("Tentando login com dados do formulário");
+            
+            const response = await api.post('/login', payload, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log("Resposta:", response.data);
+
+            if (response.data.success) {
+                const { token, usuario } = response.data;
+                localStorage.setItem("token", token);
+                localStorage.setItem("user", JSON.stringify(usuario));
                 navigate("/dashboard");
-            } else {
-                setErro("CPF ou senha incorretos");
             }
+        } catch (error) {
+            console.error("Erro detalhado:", error.response?.data);
+            setErro(error.response?.data?.message || error.response?.data?.conteudoJson?.message || "Erro ao fazer login");
+        } finally {
             setLoading(false);
-        }, 1500);
+        }
     };
 
     return (
@@ -79,74 +77,78 @@ function IdentificacaoPage() {
                     style={{ 
                         width: "100%", 
                         maxWidth: "400px", 
-                        margin: "2rem auto" 
+                        margin: "2rem auto",
+                        padding: "0 1rem"
                     }}
                 >
-                    <div style={{ 
-                        display: "flex", 
-                        flexDirection: "column", 
-                        gap: "1.5rem" 
-                    }}>
-                        {/* Campo CPF */}
-                        <div>
-                            <h5 style={{ 
-                                color: "#28324E", 
-                                marginBottom: "0.5rem" 
-                            }}>
-                                CPF
-                            </h5>
-                            <input
-                                type="text"
-                                placeholder="Digite seu CPF"
-                                value={cpf}
-                                onChange={(e) => setCpf(formatarCPF(e.target.value))}
-                                maxLength="14"
-                                style={{
-                                    width: "100%",
-                                    height: "2.0625rem",
-                                    padding: "0.5rem",
-                                    borderRadius: "0.3rem",
-                                    border: "1px solid #ccc",
-                                    fontSize: "1rem"
-                                }}
-                            />
-                        </div>
-
-                        {/* Campo Senha */}
-                        <div>
-                            <h5 style={{ 
-                                color: "#28324E", 
-                                marginBottom: "0.5rem" 
-                            }}>
-                                Senha
-                            </h5>
-                            <input
-                                type="password"
-                                placeholder="Digite sua senha"
-                                value={senha}
-                                onChange={(e) => setSenha(e.target.value)}
-                                style={{
-                                    width: "100%",
-                                    height: "2.0625rem",
-                                    padding: "0.5rem",
-                                    borderRadius: "0.3rem",
-                                    border: "1px solid #ccc",
-                                    fontSize: "1rem"
-                                }}
-                            />
-                        </div>
+                    {/* Campo Email */}
+                    <div style={{ marginBottom: "1.5rem" }}>
+                        <label 
+                            htmlFor="email"
+                            style={{ 
+                                display: "block", 
+                                marginBottom: "0.5rem",
+                                color: "#28324E",
+                                fontSize: "1.1rem"
+                            }}
+                        >
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Digite seu email"
+                            style={{
+                                width: "100%",
+                                padding: "0.75rem",
+                                borderRadius: "0.3rem",
+                                border: "1px solid #ccc",
+                                fontSize: "1rem"
+                            }}
+                        />
                     </div>
 
-                    {/* Mensagem de erro */}
+                    {/* Campo Senha */}
+                    <div style={{ marginBottom: "1.5rem" }}>
+                        <label 
+                            htmlFor="senha"
+                            style={{ 
+                                display: "block", 
+                                marginBottom: "0.5rem",
+                                color: "#28324E",
+                                fontSize: "1.1rem"
+                            }}
+                        >
+                            Senha
+                        </label>
+                        <input
+                            type="password"
+                            id="senha"
+                            value={senha}
+                            onChange={(e) => setSenha(e.target.value)}
+                            placeholder="Digite sua senha"
+                            style={{
+                                width: "100%",
+                                padding: "0.75rem",
+                                borderRadius: "0.3rem",
+                                border: "1px solid #ccc",
+                                fontSize: "1rem"
+                            }}
+                        />
+                    </div>
+
+                    {/* Mensagem de Erro */}
                     {erro && (
-                        <p style={{ 
-                            color: "red", 
-                            textAlign: "center", 
-                            marginTop: "1rem",
+                        <div style={{
+                            color: "#dc3545",
+                            marginBottom: "1rem",
+                            textAlign: "center",
                             fontSize: "0.9rem"
                         }}>
                             {erro}
-                        </p>
+                        </div>
                     )}
 
                     {/* Botão de Confirmar */}
@@ -176,12 +178,9 @@ function IdentificacaoPage() {
                     </div>
 
                     {/* Link "Esqueceu a senha?" */}
-                    <div style={{ 
-                        textAlign: "center", 
-                        marginTop: "1rem" 
-                    }}>
-                        <a 
-                            href="#esqueci-senha" 
+                    <div style={{ textAlign: "center", marginTop: "1rem" }}>
+                        <Link 
+                            to="/esqueci-senha"
                             style={{ 
                                 color: "#28324E", 
                                 textDecoration: "none",
@@ -190,8 +189,26 @@ function IdentificacaoPage() {
                             }}
                         >
                             Esqueceu a senha?
-                        </a>
+                        </Link>
                     </div>
+                    {/* Botão de Login */}
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        style={{
+                            width: "100%",
+                            padding: "0.75rem",
+                            backgroundColor: "#4CAF50",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "0.3rem",
+                            fontSize: "1.1rem",
+                            cursor: loading ? "not-allowed" : "pointer",
+                            opacity: loading ? 0.7 : 1
+                        }}
+                    >
+                        {loading ? "Entrando..." : "Entrar"}
+                    </button>
                 </form>
 
                 <Footer />
@@ -200,4 +217,4 @@ function IdentificacaoPage() {
     );
 }
 
-export default IdentificacaoPage;
+export default LoginPage;
