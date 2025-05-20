@@ -245,6 +245,14 @@ function PFFormsPage() {
         // Validação do formulário
         if (validateForm()) {
             try {
+                setSubmitStatus({ message: 'Enviando dados...', isSuccess: true });
+                
+                // Simulando chamada à API
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Redireciona para a página de sucesso após cadastro
+                window.location.href = '/cadastro-sucesso';
+                
                 // Extraindo dados sem campos que não precisam ser enviados
                 const { confirmarSenha, tipoUsuario, documentos, ...userPayload } = formData;
                 const userTipo = tipoUsuario || "fisico";

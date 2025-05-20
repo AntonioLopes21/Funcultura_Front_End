@@ -151,6 +151,46 @@ function LoginPage() {
                         </div>
                     )}
 
+                    {/* Botão de Confirmar */}
+                    <div style={{ 
+                        display: "flex", 
+                        justifyContent: "center", 
+                        marginTop: "2rem" 
+                    }}>
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            style={{
+                                backgroundColor: loading ? "#cccccc" : "#4CAF50",
+                                color: "#fff",
+                                fontSize: "1.1rem",
+                                width: "12.9375rem",
+                                height: "2.6875rem",
+                                borderRadius: "0.3rem",
+                                fontWeight: "500",
+                                border: "none",
+                                cursor: "pointer",
+                                transition: "background-color 0.3s"
+                            }}
+                        >
+                            {loading ? "Carregando..." : "Confirmar"}
+                        </button>
+                    </div>
+
+                    {/* Link "Esqueceu a senha?" */}
+                    <div style={{ textAlign: "center", marginTop: "1rem" }}>
+                        <Link 
+                            to="/esqueci-senha"
+                            style={{ 
+                                color: "#28324E", 
+                                textDecoration: "none",
+                                fontSize: "0.9rem",
+                                fontStyle: "italic"
+                            }}
+                        >
+                            Esqueceu a senha?
+                        </Link>
+                    </div>
                     {/* Botão de Login */}
                     <button
                         type="submit"
