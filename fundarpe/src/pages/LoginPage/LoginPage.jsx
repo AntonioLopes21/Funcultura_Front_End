@@ -151,32 +151,6 @@ function LoginPage() {
                         </div>
                     )}
 
-                    {/* Botão de Confirmar */}
-                    <div style={{ 
-                        display: "flex", 
-                        justifyContent: "center", 
-                        marginTop: "2rem" 
-                    }}>
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            style={{
-                                backgroundColor: loading ? "#cccccc" : "#4CAF50",
-                                color: "#fff",
-                                fontSize: "1.1rem",
-                                width: "12.9375rem",
-                                height: "2.6875rem",
-                                borderRadius: "0.3rem",
-                                fontWeight: "500",
-                                border: "none",
-                                cursor: "pointer",
-                                transition: "background-color 0.3s"
-                            }}
-                        >
-                            {loading ? "Carregando..." : "Confirmar"}
-                        </button>
-                    </div>
-
                     {/* Link "Esqueceu a senha?" */}
                     <div style={{ textAlign: "center", marginTop: "1rem" }}>
                         <Link 
@@ -191,6 +165,7 @@ function LoginPage() {
                             Esqueceu a senha?
                         </Link>
                     </div>
+
                     {/* Botão de Login */}
                     <button
                         type="submit"
@@ -204,7 +179,8 @@ function LoginPage() {
                             borderRadius: "0.3rem",
                             fontSize: "1.1rem",
                             cursor: loading ? "not-allowed" : "pointer",
-                            opacity: loading ? 0.7 : 1
+                            opacity: loading ? 0.7 : 1,
+                            marginTop: "2rem"
                         }}
                     >
                         {loading ? "Entrando..." : "Entrar"}
