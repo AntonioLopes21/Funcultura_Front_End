@@ -1,11 +1,35 @@
-import React from "react";
+import React,{ useEffect, useState} from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { ImagesProject } from "../../assets/Images";
-import { Link } from "react-router-dom";
+import { Link, useLocation  } from "react-router-dom";
 import "../PFFormsPage/PFFormsPage.css";
+import api from "../../services/api";
 
 function SucessoCadastroPage() {
+  
+  const routerLocation = useLocation();
+  const [statusCadastro, setStatusCadastro] = useState("Processando...");
+
+  // Verifica o status do cadastro ao carregar a página
+  useEffect(() => {
+    if (routerLocation.state?.idCadastro) {
+      // Usando a rota existente GET /documentos/:id_usuario
+      api.get(`/documentos/${routerLocation.state.idCadastro}`)
+        .then(response => {
+          setStatusCadastro(response.data.status || "Recebido com sucesso");
+        })
+        .catch(error => {
+          console.error("Erro ao verificar status:", error);
+          setStatusCadastro("Erro ao verificar status");
+        });
+
+      // Opcional: Envia confirmação de visualização
+      api.post('/cadastro/confirmacao', { 
+     idCadastro: routerLocation.state.idCadastro
+      }).catch(console.error);
+    }
+  }, [routerLocation]);
     return (
         <div className="menu_principal">
             <Header />
