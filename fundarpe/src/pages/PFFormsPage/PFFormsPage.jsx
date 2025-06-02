@@ -4,8 +4,11 @@ import Header from "../../components/Header/Header";
 import "../PFFormsPage/PFFormsPage.css";
 import "../../components/MainContent/MainContent.css";
 import api from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 function PFFormsPage() {
+    const navigate = useNavigate();
+    
     // Estados para os campos do formulário
     const [formData, setFormData] = useState({
         nomeCompleto: '',
@@ -242,6 +245,14 @@ function PFFormsPage() {
         // Validação do formulário
         if (validateForm()) {
             try {
+                setSubmitStatus({ message: 'Enviando dados...', isSuccess: true });
+                
+                // Simulando chamada à API
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Redireciona para a página de sucesso após cadastro
+                window.location.href = '/cadastro-sucesso';
+                
                 // Extraindo dados sem campos que não precisam ser enviados
                 const { confirmarSenha, tipoUsuario, documentos, ...userPayload } = formData;
                 const userTipo = tipoUsuario || "fisico";
@@ -266,19 +277,45 @@ function PFFormsPage() {
                 // Envio da requisição para a API
                 const response = await api.post('/user/create', payload);
 
-                // Simulando delay de rede
-                await new Promise(resolve => setTimeout(resolve, 1500));
-
                 setSubmitStatus({
-                    message: 'Cadastro realizado com sucesso!',
+                    message: 'Cadastro realizado com sucesso! Você já pode fazer login.',
                     isSuccess: true
                 });
+
+                // Redirecionar para login após 2 segundos
+                setTimeout(() => {
+                    navigate('/login');
+                }, 2000);
+
             } catch (error) {
                 console.error("Erro no cadastro:", error.response?.data || error.message);
-                setSubmitStatus({
-                    message: 'Erro ao cadastrar. Tente novamente.',
-                    isSuccess: false
-                });
+                
+                // Tratamento específico de erros
+                if (error.response?.status === 400) {
+                    const errorMessage = error.response.data?.message || error.response.data?.conteudoJson?.message;
+                    
+                    if (errorMessage?.includes('CPF')) {
+                        setSubmitStatus({ 
+                            message: 'CPF já cadastrado no sistema', 
+                            isSuccess: false 
+                        });
+                    } else if (errorMessage?.includes('email')) {
+                        setSubmitStatus({ 
+                            message: 'Email já cadastrado no sistema', 
+                            isSuccess: false 
+                        });
+                    } else {
+                        setSubmitStatus({
+                            message: 'Erro nos dados enviados. Por favor, verifique as informações e tente novamente.',
+                            isSuccess: false
+                        });
+                    }
+                } else {
+                    setSubmitStatus({
+                        message: 'Erro ao cadastrar. Por favor, tente novamente mais tarde.',
+                        isSuccess: false
+                    });
+                }
             }
         } else {
             setSubmitStatus({

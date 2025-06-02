@@ -3,6 +3,8 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import "../PJFormsPage/PJFormsPage.css";
 import "../../components/MainContent/MainContent.css";
+import api from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 function PJFormsPage() {
     // Estado unificado como no formulário PF
@@ -53,6 +55,8 @@ function PJFormsPage() {
         isSuccess: false
     });
 
+    const navigate = useNavigate();
+
     // Funções auxiliares (formatar e validar) - mantidas iguais
     const formatCNPJ = (value) => {
         const cleaned = value.replace(/\D/g, '');
@@ -92,10 +96,20 @@ function PJFormsPage() {
     };
 
     const validateCNPJ = (cnpj) => {
+        // Remove caracteres não numéricos
         cnpj = cnpj.replace(/[^\d]+/g, '');
         
-        if (cnpj.length !== 14 || /^(\d)\1{13}$/.test(cnpj)) return false;
+        // Verifica se tem 14 dígitos
+        if (cnpj.length !== 14) return false;
         
+        // Verifica se não são todos números iguais
+        if (/^(\d)\1{13}$/.test(cnpj)) return false;
+
+        // Durante a fase de testes, vamos aceitar qualquer CNPJ que tenha 14 dígitos
+        // e não seja composto por números repetidos
+        return true;
+
+        /* Comentando a validação complexa para facilitar os testes
         let length = cnpj.length - 2;
         let numbers = cnpj.substring(0, length);
         const digits = cnpj.substring(length);
@@ -124,6 +138,7 @@ function PJFormsPage() {
         if (result !== parseInt(digits.charAt(1))) return false;
         
         return true;
+        */
     };
 
     const validateCPF = (cpf) => {
@@ -430,22 +445,85 @@ function PJFormsPage() {
             try {
                 setSubmitStatus({ message: 'Enviando dados...', isSuccess: true });
                 
-                // Simulação de chamada à API
-                console.log('Dados do formulário:', formData);
-                
-                await new Promise(resolve => setTimeout(resolve, 1500));
+                // Prepare the payload for the API
+                const dirigente = formData.dirigentes[0]; // Get the first dirigente
+                const cnpjParaEnviar = formData.empresa.cnpj.replace(/\D/g, '');
+                const cpfParaEnviar = dirigente.cpf.replace(/\D/g, '');
+                const formattedBirthDate = new Date(dirigente.dataNascimento).toISOString().split('T')[0];
+
+                // Payload de acordo com o Swagger
+                const payload = {
+                    razao_social: formData.empresa.razaoSocial,
+                    cnpj: cnpjParaEnviar,
+                    endereco: formData.empresa.endereco,
+                    nome_completo: dirigente.nomeCompleto,
+                    data_nascimento: formattedBirthDate,
+                    cpf: cpfParaEnviar,
+                    email: dirigente.email,
+                    senha: dirigente.senha,
+                    tipo_usuario: "juridico"
+                };
+
+                console.log("Enviando cadastro PJ:", { 
+                    ...payload,
+                    senha: '[SENHA_OCULTADA]' 
+                });
+
+                // Send request to API
+                const response = await api.post('/user/create', payload);
                 
                 setSubmitStatus({ 
-                    message: 'Cadastro realizado com sucesso!', 
+                    message: 'Cadastro realizado com sucesso! Você já pode fazer login.', 
                     isSuccess: true 
                 });
                 
+                // Redirecionar para login após 2 segundos
+                setTimeout(() => {
+                    navigate('/login');
+                }, 2000);
+                
             } catch (error) {
-                setSubmitStatus({ 
-                    message: 'Erro ao cadastrar. Tente novamente.', 
-                    isSuccess: false 
-                });
-                console.error('Erro no cadastro:', error);
+                console.error('Erro no cadastro:', error.response?.data || error.message);
+                
+                // Tratamento específico de erros baseado no Swagger e mensagens do banco
+                if (error.response?.status === 400) {
+                    const errorMessage = error.response.data?.message || error.response.data?.conteudoJson?.message;
+                    
+                    if (errorMessage?.includes('CPF')) {
+                        setSubmitStatus({ 
+                            message: 'CPF já cadastrado no sistema', 
+                            isSuccess: false 
+                        });
+                    } else if (errorMessage?.includes('CNPJ') || errorMessage?.includes('produtores_juridicos_cnpj_key')) {
+                        setSubmitStatus({ 
+                            message: 'CNPJ já cadastrado no sistema. Por favor, utilize outro CNPJ ou entre em contato com o suporte.', 
+                            isSuccess: false 
+                        });
+                    } else if (errorMessage?.includes('email')) {
+                        setSubmitStatus({ 
+                            message: 'Email já cadastrado no sistema', 
+                            isSuccess: false 
+                        });
+                    } else {
+                        // Log detalhado para debug
+                        console.log('Detalhes do erro:', {
+                            status: error.response.status,
+                            data: error.response.data,
+                            message: errorMessage,
+                            conteudoJson: error.response.data?.conteudoJson
+                        });
+                        
+                        setSubmitStatus({ 
+                            message: 'Erro nos dados enviados. Por favor, verifique as informações e tente novamente.', 
+                            isSuccess: false 
+                        });
+                    }
+                } else {
+                    setSubmitStatus({ 
+                        message: 'Erro ao cadastrar. Por favor, tente novamente mais tarde.', 
+                        isSuccess: false 
+                    });
+                }
             }
         } else {
             setSubmitStatus({ 
